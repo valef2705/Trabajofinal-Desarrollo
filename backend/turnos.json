@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1749615084465,
+    "especialidad": "Oftalmologia",
+    "medico": "Dr. Diaz Carlos",
+    "paciente": "Ernestina Amoedo",
+    "fecha": "2025-07-02",
+    "hora": "17",
+    "estado": "confirmado"
+  },
+  {
+    "id": 1749615307861,
+    "especialidad": "Cardiologia",
+    "medico": "Dra. Lopez Ana",
+    "paciente": "Rolo Polo",
+    "fecha": "2025-07-04",
+    "hora": "18",
+    "estado": "cancelado"
+  },
+  {
+    "id": 1749628049395,
+    "especialidad": "Cardiologia",
+    "medico": "Dr. Eduardo Pino",
+    "paciente": "valentina fernandez ",
+    "fecha": "2025-08-20",
+    "hora": "17",
+    "estado": "confirmado"
+  },
+  {
+    "id": 1749628720398,
+    "especialidad": "Oftalmologia",
+    "medico": "Dr. Diaz Carlos",
+    "paciente": "Horacio Soria",
+    "fecha": "2025-08-30",
+    "hora": "15",
+    "estado": "cancelado"
+  },
+  {
+    "id": 1749628878195,
+    "especialidad": "Clinica Medica",
+    "medico": "Dr. Hernandez Jose",
+    "paciente": "Camila Morat",
+    "fecha": "2025-07-11",
+    "hora": "17",
+    "estado": "cancelado"
+  }
+]
