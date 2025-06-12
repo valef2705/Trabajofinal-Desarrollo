@@ -1,0 +1,22 @@
+/* Estilos para el cuerpo de la página */
+body {
+  background-color: #f8f9fa; /* Color de fondo */
+  color: #343a40; /* Color del texto */
+}
+
+/* Estilos para el contenedor principal */
+.container {
+  background-color: #ffffff; /* Color de fondo del contenedor principal */
+  border-radius: 8px; /* Borde redondeado para el contenedor */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 20px; /* Espaciado interno */
+}
+
+/* Estilos para el encabezado */
+h1 {
+  color: #007bff; /* Color del texto del encabezado */
+  margin-top: 20px; /* Margen superior */
+  margin-bottom: 40px; /* Margen inferior */
+}
+
+/* Resto de estilos como antes... */
