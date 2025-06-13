@@ -1,47 +1,55 @@
 [
   {
-    "id": 1749615084465,
-    "especialidad": "Oftalmologia",
-    "medico": "Dr. Diaz Carlos",
-    "paciente": "Ernestina Amoedo",
-    "fecha": "2025-07-02",
-    "hora": "17",
-    "estado": "confirmado"
-  },
-  {
-    "id": 1749615307861,
+    "id": 1749789225729,
     "especialidad": "Cardiologia",
     "medico": "Dra. Lopez Ana",
-    "paciente": "Rolo Polo",
-    "fecha": "2025-07-04",
-    "hora": "18",
-    "estado": "cancelado"
+    "paciente": "Pablo Amhad",
+    "fecha": "2025-06-18",
+    "hora": "16"
   },
   {
-    "id": 1749628049395,
+    "id": 1749791154230,
+    "especialidad": "Cardiologia",
+    "medico": "Dra. Lopez Ana",
+    "paciente": "Carla Noelia",
+    "fecha": "2025-07-04",
+    "hora": "17",
+    "estado": "pendiente"
+  },
+  {
+    "id": 1749792410058,
+    "especialidad": "Neumonologia",
+    "medico": "Dr. Ramirez Luis",
+    "paciente": "Paola Gallardo",
+    "fecha": "2025-07-03",
+    "hora": "17",
+    "estado": "pendiente"
+  },
+  {
+    "id": 1749792942353,
+    "especialidad": "Dermatologia",
+    "medico": "Dra. Martinez Laura",
+    "paciente": "Delfina Ruiz",
+    "fecha": "2025-06-26",
+    "hora": "17",
+    "estado": "pendiente"
+  },
+  {
+    "id": 1749795125551,
+    "especialidad": "Gastroenterologia",
+    "medico": "Dr. Aguilar Marcelo",
+    "paciente": "Lucia Gomez",
+    "fecha": "2025-08-04",
+    "hora": "9",
+    "estado": "pendiente"
+  },
+  {
+    "id": 1749795963267,
     "especialidad": "Cardiologia",
     "medico": "Dr. Eduardo Pino",
-    "paciente": "valentina fernandez ",
-    "fecha": "2025-08-20",
-    "hora": "17",
-    "estado": "confirmado"
-  },
-  {
-    "id": 1749628720398,
-    "especialidad": "Oftalmologia",
-    "medico": "Dr. Diaz Carlos",
-    "paciente": "Horacio Soria",
-    "fecha": "2025-08-30",
-    "hora": "15",
-    "estado": "cancelado"
-  },
-  {
-    "id": 1749628878195,
-    "especialidad": "Clinica Medica",
-    "medico": "Dr. Hernandez Jose",
-    "paciente": "Camila Morat",
-    "fecha": "2025-07-11",
-    "hora": "17",
-    "estado": "cancelado"
+    "paciente": "Valentina Fernnadez",
+    "fecha": "2025-06-27",
+    "hora": "11",
+    "estado": "pendiente"
   }
 ]
