@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
   const [especialidad, setEspecialidad] = useState('');
-  const [medico, setMedico] = useState('');
-  const [paciente, setPaciente] = useState('');
+  const [profesional, setProfesional] = useState('');
+  const [nombrePaciente, setNombrePaciente] = useState('');
   const [fecha, setFecha] = useState('');
   const [hora, setHora] = useState('');
 
   useEffect(() => {
     if (turnoEditable) {
       setEspecialidad(turnoEditable.especialidad);
-      setMedico(turnoEditable.medico);
-      setPaciente(turnoEditable.paciente);
+      setProfesional(turnoEditable.profesional);
+      setNombrePaciente(turnoEditable.nombrePaciente);
       setFecha(turnoEditable.fecha);
       setHora(turnoEditable.hora || '');
     }
@@ -19,11 +19,11 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (especialidad && medico && paciente && fecha && hora) {
-      agregarTurno({ especialidad, medico, paciente, fecha, hora });
+    if (especialidad && profesional && nombrePaciente && fecha && hora) {
+      agregarTurno({ especialidad, profesional, nombrePaciente, fecha, hora });
       setEspecialidad('');
-      setMedico('');
-      setPaciente('');
+      setProfesional('');
+      setNombrePaciente('');
       setFecha('');
       setHora('');
     } else {
@@ -35,9 +35,9 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
     <form onSubmit={handleSubmit} className="mb-4">
       <div className="mb-3">
         <label className="form-label">Especialidad:</label>
-        <select 
-          className="form-select" 
-          value={especialidad} 
+        <select
+          className="form-select"
+          value={especialidad}
           onChange={(e) => setEspecialidad(e.target.value)}
         >
           <option value="">Seleccione una especialidad</option>
@@ -48,14 +48,14 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
       </div>
 
       <div className="mb-3">
-        <label className="form-label">Médico:</label>
-        <select 
-          className="form-select" 
-          value={medico} 
-          onChange={(e) => setMedico(e.target.value)} 
+        <label className="form-label">Profesional:</label>
+        <select
+          className="form-select"
+          value={profesional}
+          onChange={(e) => setProfesional(e.target.value)}
           disabled={!especialidad}
         >
-          <option value="">Seleccione un médico</option>
+          <option value="">Seleccione un profesional</option>
           {especialidad && medicos[especialidad].map((med) => (
             <option key={med} value={med}>{med}</option>
           ))}
@@ -63,30 +63,30 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
       </div>
 
       <div className="mb-3">
-        <label className="form-label">Nombre y Apellido del Paciente:</label>
-        <input 
-          type="text" 
-          className="form-control" 
-          value={paciente} 
-          onChange={(e) => setPaciente(e.target.value)} 
+        <label className="form-label">Nombre del Paciente:</label>
+        <input
+          type="text"
+          className="form-control"
+          value={nombrePaciente}
+          onChange={(e) => setNombrePaciente(e.target.value)}
         />
       </div>
 
       <div className="mb-3">
         <label className="form-label">Fecha:</label>
-        <input 
-          type="date" 
-          className="form-control" 
-          value={fecha} 
-          onChange={(e) => setFecha(e.target.value)} 
+        <input
+          type="date"
+          className="form-control"
+          value={fecha}
+          onChange={(e) => setFecha(e.target.value)}
         />
       </div>
 
       <div className="mb-3">
         <label className="form-label">Hora:</label>
-        <select 
-          className="form-select" 
-          value={hora} 
+        <select
+          className="form-select"
+          value={hora}
           onChange={(e) => setHora(e.target.value)}
         >
           <option value="">Seleccione un horario</option>
