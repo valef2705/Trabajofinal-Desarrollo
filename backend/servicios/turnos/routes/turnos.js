@@ -1,55 +1,62 @@
 const express = require('express');
-const router = express.Router();
 const Turno = require('../models/Turno');
+const router = express.Router();
 
 // Obtener todos los turnos
 router.get('/', async (req, res) => {
   try {
     const turnos = await Turno.find();
     res.json(turnos);
-  } catch (error) {
-    res.status(500).json({ mensaje: 'Error al obtener los turnos', error });
+  } catch (err) {
+    res.status(500).json({ message: 'Error al obtener los turnos', error: err });
   }
 });
 
 // Crear un nuevo turno
 router.post('/', async (req, res) => {
   try {
-    const nuevoTurno = new Turno(req.body);
-    const turnoGuardado = await nuevoTurno.save();
+    const turno = new Turno(req.body);
+    const turnoGuardado = await turno.save();
     res.status(201).json(turnoGuardado);
-  } catch (error) {
-    res.status(400).json({ mensaje: 'Error al crear el turno', error });
+  } catch (err) {
+    res.status(400).json({ message: 'Error al crear turno', error: err });
   }
 });
 
-// Confirmar un turno
-router.put('/:id/confirmar', async (req, res) => {
+// Actualizar un turno existente
+router.put('/:id', async (req, res) => {
   try {
-    const turno = await Turno.findByIdAndUpdate(req.params.id, { estado: 'confirmado' }, { new: true });
-    res.json(turno);
-  } catch (error) {
-    res.status(400).json({ mensaje: 'Error al confirmar el turno', error });
-  }
-});
-
-// Cancelar un turno
-router.put('/:id/cancelar', async (req, res) => {
-  try {
-    const turno = await Turno.findByIdAndUpdate(req.params.id, { estado: 'cancelado' }, { new: true });
-    res.json(turno);
-  } catch (error) {
-    res.status(400).json({ mensaje: 'Error al cancelar el turno', error });
+    const turnoActualizado = await Turno.findByIdAndUpdate(
+      req.params.id,
+      {
+        nombrePaciente: req.body.nombrePaciente,
+        especialidad: req.body.especialidad,
+        profesional: req.body.profesional,
+        fecha: req.body.fecha,
+        hora: req.body.hora,
+        estado: req.body.estado || 'pendiente'
+      },
+      { new: true, runValidators: true }
+    );
+    if (!turnoActualizado) {
+      return res.status(404).json({ message: 'Turno no encontrado' });
+    }
+    res.json(turnoActualizado);
+  } catch (err) {
+    res.status(400).json({ message: 'Error al actualizar turno', error: err });
   }
 });
 
 // Eliminar un turno
 router.delete('/:id', async (req, res) => {
   try {
-    await Turno.findByIdAndDelete(req.params.id);
-    res.json({ mensaje: 'Turno eliminado correctamente' });
-  } catch (error) {
-    res.status(500).json({ mensaje: 'Error al eliminar el turno', error });
+    const resultado = await Turno.findByIdAndDelete(req.params.id);
+    if (!resultado) {
+      return res.status(404).json({ message: 'Turno no encontrado' });
+    }
+    res.json({ message: 'Turno eliminado correctamente' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error al eliminar turno', error: err });
   }
 });
 

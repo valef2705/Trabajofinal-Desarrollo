@@ -6,7 +6,11 @@ const turnoSchema = new mongoose.Schema({
   profesional: { type: String, required: true },
   fecha: { type: String, required: true },
   hora: { type: String, required: true },
-  estado: { type: String, enum: ['pendiente', 'confirmado', 'cancelado'], default: 'pendiente' }
+  estado: {
+    type: String,
+    enum: ['pendiente', 'confirmado', 'cancelado'],
+    default: 'pendiente'
+  }
 });
 
 module.exports = mongoose.model('Turno', turnoSchema);
