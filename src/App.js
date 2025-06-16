@@ -33,15 +33,24 @@ function App() {
 
   const agregarTurno = (nuevoTurno) => {
     if (turnoEditable !== null) {
-      axios.put(`http://localhost:4001/api/turnos/${turnoEditable._id}`, nuevoTurno)
+      axios.put(`http://localhost:4001/api/turnos/${turnoEditable._id}`, {
+        ...nuevoTurno,
+        estado: turnoEditable.estado || 'pendiente'
+      })
+        .then(() => {
+          // Luego de actualizar, traemos todos los turnos para sincronizar el frontend
+          return axios.get('http://localhost:4001/api/turnos');
+        })
         .then(res => {
-          const turnosActualizados = turnos.map(t => t._id === res.data._id ? res.data : t);
-          setTurnos(turnosActualizados);
+          setTurnos(res.data);
           setTurnoEditable(null);
         })
         .catch(err => console.error('Error al actualizar el turno:', err));
     } else {
-      axios.post('http://localhost:4001/api/turnos', nuevoTurno)
+      axios.post('http://localhost:4001/api/turnos', {
+        ...nuevoTurno,
+        estado: 'pendiente'
+      })
         .then(res => setTurnos([...turnos, res.data]))
         .catch(err => console.error('Error al guardar el turno:', err));
     }

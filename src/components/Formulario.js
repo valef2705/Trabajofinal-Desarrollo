@@ -20,7 +20,16 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (especialidad && profesional && nombrePaciente && fecha && hora) {
-      agregarTurno({ especialidad, profesional, nombrePaciente, fecha, hora });
+      const nuevoTurno = {
+        especialidad,
+        profesional,
+        nombrePaciente,
+        fecha,
+        hora
+      };
+
+      agregarTurno(nuevoTurno);
+
       setEspecialidad('');
       setProfesional('');
       setNombrePaciente('');

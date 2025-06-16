@@ -2,13 +2,12 @@ import React from 'react';
 import axios from 'axios';
 
 function TablaTurnos({ turnos, editarTurno, eliminarTurno, setTurnos, modoProfesional = false }) {
-  const cambiarEstado = (turno, nuevoEstado) => {
-    const turnoActualizado = { ...turno, estado: nuevoEstado };
-
-    axios.put(`http://localhost:4001/api/turnos/${turno._id}`, turnoActualizado)
+  const cambiarEstado = (id, nuevoEstado) => {
+    axios
+      .put(`http://localhost:4001/api/turnos/${id}`, { estado: nuevoEstado })
       .then((res) => {
-        setTurnos(prev =>
-          prev.map(t => (t._id === turno._id ? res.data : t))
+        setTurnos((prevTurnos) =>
+          prevTurnos.map((t) => (t._id === id ? res.data : t))
         );
       })
       .catch((err) => {
@@ -31,7 +30,7 @@ function TablaTurnos({ turnos, editarTurno, eliminarTurno, setTurnos, modoProfes
       </thead>
       <tbody>
         {turnos.map((turno, index) => (
-          <tr key={index}>
+          <tr key={turno._id || index}>
             <td>{turno.especialidad}</td>
             <td>{turno.profesional}</td>
             <td>{turno.nombrePaciente}</td>
@@ -43,21 +42,31 @@ function TablaTurnos({ turnos, editarTurno, eliminarTurno, setTurnos, modoProfes
                 <>
                   <button
                     className="btn btn-success btn-sm me-2"
-                    onClick={() => cambiarEstado(turno, 'confirmado')}
+                    onClick={() => cambiarEstado(turno._id, 'confirmado')}
                   >
                     Confirmar
                   </button>
                   <button
                     className="btn btn-outline-danger btn-sm"
-                    onClick={() => cambiarEstado(turno, 'cancelado')}
+                    onClick={() => cambiarEstado(turno._id, 'cancelado')}
                   >
                     Cancelar
                   </button>
                 </>
               ) : (
                 <>
-                  <button className="btn btn-warning me-2" onClick={() => editarTurno(index)}>Editar</button>
-                  <button className="btn btn-danger" onClick={() => eliminarTurno(index)}>Eliminar</button>
+                  <button
+                    className="btn btn-warning btn-sm me-2"
+                    onClick={() => editarTurno(index)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => eliminarTurno(index)}
+                  >
+                    Eliminar
+                  </button>
                 </>
               )}
             </td>
