@@ -5,7 +5,7 @@
     "medico": "Dr. Diaz Carlos",
     "paciente": "Ernestina Amoedo",
     "fecha": "2025-07-02",
-    "hora": "17",
+    "hora": "9",
     "estado": "confirmado"
   },
   {
@@ -15,15 +15,6 @@
     "paciente": "Rolo Polo",
     "fecha": "2025-07-04",
     "hora": "18",
-    "estado": "cancelado"
-  },
-  {
-    "id": 1749628049395,
-    "especialidad": "Cardiologia",
-    "medico": "Dr. Eduardo Pino",
-    "paciente": "valentina fernandez ",
-    "fecha": "2025-08-20",
-    "hora": "17",
     "estado": "confirmado"
   },
   {
@@ -32,16 +23,24 @@
     "medico": "Dr. Diaz Carlos",
     "paciente": "Horacio Soria",
     "fecha": "2025-08-30",
-    "hora": "15",
+    "hora": "11",
     "estado": "cancelado"
   },
   {
-    "id": 1749628878195,
+    "id": 1751173799095,
     "especialidad": "Clinica Medica",
     "medico": "Dr. Hernandez Jose",
-    "paciente": "Camila Morat",
-    "fecha": "2025-07-11",
-    "hora": "17",
+    "paciente": "Miranda Paz",
+    "fecha": "2025-07-02",
+    "hora": "11"
+  },
+  {
+    "id": 1751176810261,
+    "especialidad": "Clinica Medica",
+    "medico": "Dr. Hernandez Jose",
+    "paciente": "Valentina Fernandez",
+    "fecha": "2025-07-03",
+    "hora": "9",
     "estado": "cancelado"
   }
 ]

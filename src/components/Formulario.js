@@ -13,7 +13,13 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
       setMedico(turnoEditable.medico);
       setPaciente(turnoEditable.paciente);
       setFecha(turnoEditable.fecha);
-      setHora(turnoEditable.hora || '');
+      setHora(turnoEditable.hora);
+    } else {
+      setEspecialidad('');
+      setMedico('');
+      setPaciente('');
+      setFecha('');
+      setHora('');
     }
   }, [turnoEditable]);
 
@@ -21,11 +27,14 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
     e.preventDefault();
     if (especialidad && medico && paciente && fecha && hora) {
       agregarTurno({ especialidad, medico, paciente, fecha, hora });
-      setEspecialidad('');
-      setMedico('');
-      setPaciente('');
-      setFecha('');
-      setHora('');
+
+      if (!turnoEditable) {
+        setEspecialidad('');
+        setMedico('');
+        setPaciente('');
+        setFecha('');
+        setHora('');
+      }
     } else {
       alert('Por favor completá todos los campos.');
     }
@@ -35,9 +44,9 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
     <form onSubmit={handleSubmit} className="mb-4">
       <div className="mb-3">
         <label className="form-label">Especialidad:</label>
-        <select 
-          className="form-select" 
-          value={especialidad} 
+        <select
+          className="form-select"
+          value={especialidad}
           onChange={(e) => setEspecialidad(e.target.value)}
         >
           <option value="">Seleccione una especialidad</option>
@@ -49,10 +58,10 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
 
       <div className="mb-3">
         <label className="form-label">Médico:</label>
-        <select 
-          className="form-select" 
-          value={medico} 
-          onChange={(e) => setMedico(e.target.value)} 
+        <select
+          className="form-select"
+          value={medico}
+          onChange={(e) => setMedico(e.target.value)}
           disabled={!especialidad}
         >
           <option value="">Seleccione un médico</option>
@@ -63,30 +72,30 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
       </div>
 
       <div className="mb-3">
-        <label className="form-label">Nombre y Apellido del Paciente:</label>
-        <input 
-          type="text" 
-          className="form-control" 
-          value={paciente} 
-          onChange={(e) => setPaciente(e.target.value)} 
+        <label className="form-label">Paciente:</label>
+        <input
+          type="text"
+          className="form-control"
+          value={paciente}
+          onChange={(e) => setPaciente(e.target.value)}
         />
       </div>
 
       <div className="mb-3">
         <label className="form-label">Fecha:</label>
-        <input 
-          type="date" 
-          className="form-control" 
-          value={fecha} 
-          onChange={(e) => setFecha(e.target.value)} 
+        <input
+          type="date"
+          className="form-control"
+          value={fecha}
+          onChange={(e) => setFecha(e.target.value)}
         />
       </div>
 
       <div className="mb-3">
         <label className="form-label">Hora:</label>
-        <select 
-          className="form-select" 
-          value={hora} 
+        <select
+          className="form-select"
+          value={hora}
           onChange={(e) => setHora(e.target.value)}
         >
           <option value="">Seleccione un horario</option>

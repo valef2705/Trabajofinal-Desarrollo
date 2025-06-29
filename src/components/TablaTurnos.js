@@ -30,8 +30,8 @@ function TablaTurnos({ turnos, editarTurno, eliminarTurno, setTurnos, modoProfes
         </tr>
       </thead>
       <tbody>
-        {turnos.map((turno, index) => (
-          <tr key={index}>
+        {turnos.map((turno) => (
+          <tr key={turno.id}>
             <td>{turno.especialidad}</td>
             <td>{turno.medico}</td>
             <td>{turno.paciente}</td>
@@ -56,8 +56,18 @@ function TablaTurnos({ turnos, editarTurno, eliminarTurno, setTurnos, modoProfes
                 </>
               ) : (
                 <>
-                  <button className="btn btn-warning me-2" onClick={() => editarTurno(index)}>Editar</button>
-                  <button className="btn btn-danger" onClick={() => eliminarTurno(index)}>Eliminar</button>
+                  <button
+                    className="btn btn-warning me-2"
+                    onClick={() => editarTurno(turno)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => eliminarTurno(turno.id)}
+                  >
+                    Eliminar
+                  </button>
                 </>
               )}
             </td>

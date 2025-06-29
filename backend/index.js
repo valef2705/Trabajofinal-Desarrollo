@@ -60,13 +60,13 @@ app.post('/api/turnos', (req, res) => {
   }
 });
 
-// Editar turno (confirmar / cancelar)
+// Editar turno (confirmar / cancelar / modificar)
 app.put('/api/turnos/:id', (req, res) => {
   const data = leerTurnos();
-  const id = req.params.id; // ahora se trata como string
-  const index = data.findIndex(t => t.id.toString() === id);
+  const id = Number(req.params.id);
+  const index = data.findIndex(t => t.id === id);
   if (index !== -1) {
-    data[index] = { ...data[index], ...req.body }; // mantiene id original
+    data[index] = { ...data[index], ...req.body };
     if (guardarTurnos(data)) {
       console.log('✏️ Turno editado:', data[index]);
       res.json(data[index]);
@@ -81,9 +81,9 @@ app.put('/api/turnos/:id', (req, res) => {
 // Eliminar turno
 app.delete('/api/turnos/:id', (req, res) => {
   let data = leerTurnos();
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const longitudAntes = data.length;
-  data = data.filter(t => t.id.toString() !== id);
+  data = data.filter(t => t.id !== id);
   if (data.length === longitudAntes) {
     return res.status(404).json({ error: 'Turno no encontrado' });
   }

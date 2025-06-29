@@ -24,49 +24,49 @@ function App() {
   const [turnoEditable, setTurnoEditable] = useState(null);
   const [rol, setRol] = useState('');
   const [profesionalActivo, setProfesionalActivo] = useState('');
+  const [version, setVersion] = useState(0); // Para forzar re-render
 
   useEffect(() => {
+    cargarTurnos();
+  }, []);
+
+  const cargarTurnos = () => {
     axios.get('http://localhost:3001/api/turnos')
       .then(res => {
         setTurnos(res.data);
+        setVersion(prev => prev + 1); // Forzar re-render
       })
-      .catch(err => {
-        console.error('Error al cargar los turnos desde el backend:', err);
-      });
-  }, []);
+      .catch(err => console.error('Error al cargar turnos:', err));
+  };
 
   const agregarTurno = (nuevoTurno) => {
     if (turnoEditable !== null) {
-      const turnosActualizados = turnos.map((turno, index) =>
-        index === turnoEditable ? nuevoTurno : turno
-      );
-      setTurnos(turnosActualizados);
-      setTurnoEditable(null);
+      const id = turnoEditable.id;
+      axios.put(`http://localhost:3001/api/turnos/${id}`, { ...nuevoTurno, id })
+        .then(() => {
+          setTurnoEditable(null);
+          cargarTurnos(); // Actualiza datos
+        })
+        .catch(err => console.error('Error al editar el turno:', err));
     } else {
       axios.post('http://localhost:3001/api/turnos', nuevoTurno)
-        .then((res) => {
-          setTurnos([...turnos, res.data]);
+        .then(() => {
+          cargarTurnos(); // Actualiza datos
         })
-        .catch((err) => {
-          console.error('Error al guardar el turno en el backend:', err);
-        });
+        .catch(err => console.error('Error al crear turno:', err));
     }
   };
 
-  const editarTurno = (index) => {
-    setTurnoEditable(index);
+  const editarTurno = (turno) => {
+    setTurnoEditable(turno);
   };
 
-  const eliminarTurno = (index) => {
-    const turnoAEliminar = turnos[index];
-    axios.delete(`http://localhost:3001/api/turnos/${turnoAEliminar.id}`)
+  const eliminarTurno = (id) => {
+    axios.delete(`http://localhost:3001/api/turnos/${id}`)
       .then(() => {
-        const turnosActualizados = turnos.filter((_, i) => i !== index);
-        setTurnos(turnosActualizados);
+        cargarTurnos();
       })
-      .catch((err) => {
-        console.error('Error al eliminar el turno del backend:', err);
-      });
+      .catch(err => console.error('Error al eliminar turno:', err));
   };
 
   const cambiarRol = () => {
@@ -87,12 +87,14 @@ function App() {
       ) : rol === 'paciente' ? (
         <>
           <Formulario
+            key={turnoEditable?.id || 'nuevo'}
             especialidades={especialidades}
             medicos={medicos}
             agregarTurno={agregarTurno}
-            turnoEditable={turnoEditable !== null ? turnos[turnoEditable] : null}
+            turnoEditable={turnoEditable}
           />
           <TablaTurnos
+            key={version}
             turnos={turnos}
             editarTurno={editarTurno}
             eliminarTurno={eliminarTurno}
@@ -102,7 +104,6 @@ function App() {
       ) : (
         <>
           <h4>Mis Turnos (Profesional)</h4>
-
           <div className="mb-3">
             <label className="form-label">Seleccioná tu nombre:</label>
             <select
@@ -116,14 +117,13 @@ function App() {
               ))}
             </select>
           </div>
-
           {profesionalActivo && (
             <TablaTurnos
+              key={version + profesionalActivo}
               turnos={turnos.filter(turno => turno.medico === profesionalActivo)}
-              editarTurno={editarTurno}
-              eliminarTurno={eliminarTurno}
-              setTurnos={setTurnos}
               modoProfesional
+              setTurnos={setTurnos}
+              eliminarTurno={eliminarTurno}
             />
           )}
         </>
