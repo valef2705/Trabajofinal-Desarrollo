@@ -9,15 +9,6 @@
     "estado": "confirmado"
   },
   {
-    "id": 1749615307861,
-    "especialidad": "Cardiologia",
-    "medico": "Dra. Lopez Ana",
-    "paciente": "Rolo Polo",
-    "fecha": "2025-07-04",
-    "hora": "18",
-    "estado": "confirmado"
-  },
-  {
     "id": 1749628720398,
     "especialidad": "Oftalmologia",
     "medico": "Dr. Diaz Carlos",
@@ -42,5 +33,14 @@
     "fecha": "2025-07-03",
     "hora": "9",
     "estado": "cancelado"
+  },
+  {
+    "id": 1751313503945,
+    "especialidad": "Gastroenterologia",
+    "medico": "Dr. Aguilar Marcelo",
+    "paciente": "Pablo Lastra",
+    "fecha": "2025-07-03",
+    "hora": "11",
+    "estado": "confirmado"
   }
 ]
