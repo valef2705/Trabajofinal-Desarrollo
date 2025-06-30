@@ -14,6 +14,12 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
       setNombrePaciente(turnoEditable.nombrePaciente);
       setFecha(turnoEditable.fecha);
       setHora(turnoEditable.hora || '');
+    } else {
+      setEspecialidad('');
+      setProfesional('');
+      setNombrePaciente('');
+      setFecha('');
+      setHora('');
     }
   }, [turnoEditable]);
 
@@ -98,19 +104,15 @@ function Formulario({ especialidades, medicos, agregarTurno, turnoEditable }) {
           value={hora}
           onChange={(e) => setHora(e.target.value)}
         >
-          <option value="">Seleccione un horario</option>
-          <option value="9">9:00</option>
-          <option value="11">11:00</option>
-          <option value="12">12:00</option>
-          <option value="15">15:00</option>
-          <option value="16">16:00</option>
-          <option value="17">17:00</option>
-          <option value="18">18:00</option>
+          <option value="">Seleccione una hora</option>
+          {[...Array(24).keys()].map((h) => (
+            <option key={h} value={h}>{h}:00</option>
+          ))}
         </select>
       </div>
 
       <button type="submit" className="btn btn-primary">
-        {turnoEditable ? 'Aceptar' : 'Agregar'}
+        {turnoEditable ? 'Actualizar Turno' : 'Agregar Turno'}
       </button>
     </form>
   );

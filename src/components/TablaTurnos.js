@@ -3,11 +3,20 @@ import axios from 'axios';
 
 function TablaTurnos({ turnos, editarTurno, eliminarTurno, setTurnos, modoProfesional = false }) {
   const cambiarEstado = (id, nuevoEstado) => {
+    const turno = turnos.find((t) => t._id === id);
+    if (!turno) return;
+
+    const turnoActualizado = {
+      ...turno,
+      estado: nuevoEstado
+    };
+
     axios
-      .put(`http://localhost:4001/api/turnos/${id}`, { estado: nuevoEstado })
+      .put(`http://localhost:4001/api/turnos/${id}`, turnoActualizado)
       .then((res) => {
-        setTurnos((prevTurnos) =>
-          prevTurnos.map((t) => (t._id === id ? res.data : t))
+        const actualizado = res.data;
+        setTurnos((prev) =>
+          prev.map((t) => (t._id === actualizado._id ? actualizado : t))
         );
       })
       .catch((err) => {
@@ -30,7 +39,7 @@ function TablaTurnos({ turnos, editarTurno, eliminarTurno, setTurnos, modoProfes
       </thead>
       <tbody>
         {turnos.map((turno, index) => (
-          <tr key={turno._id || index}>
+          <tr key={turno._id}>
             <td>{turno.especialidad}</td>
             <td>{turno.profesional}</td>
             <td>{turno.nombrePaciente}</td>

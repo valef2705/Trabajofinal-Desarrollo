@@ -38,12 +38,8 @@ function App() {
         estado: turnoEditable.estado || 'pendiente'
       })
         .then(() => {
-          // Luego de actualizar, traemos todos los turnos para sincronizar el frontend
-          return axios.get('http://localhost:4001/api/turnos');
-        })
-        .then(res => {
-          setTurnos(res.data);
-          setTurnoEditable(null);
+          // Recarga la página para reflejar cambios al instante
+          window.location.reload();
         })
         .catch(err => console.error('Error al actualizar el turno:', err));
     } else {
